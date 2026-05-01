@@ -19,7 +19,8 @@ function App() {
 
     try {
       // Remember to update this URL with your Render URL when you deploy!
-      const response = await fetch('http://localhost:10000/upload-pdf', {
+      // Use the URL Render gives you after deployment
+      const response = await fetch('https://studyapp-yk9p.onrender.com//upload-pdf', {
         method: 'POST',
         body: formData,
       });
