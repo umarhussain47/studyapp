@@ -1,36 +1,98 @@
-/* Button UI styling */
-.select-btn-ui {
-  margin-top: 20px;
-  background: #00ffcc;
-  color: #000;
-  padding: 12px 30px;
-  border-radius: 10px;
-  font-weight: 800;
-  display: inline-block;
-  transition: transform 0.2s;
+/* Core Layout */
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
 }
 
-.upload-dropzone:hover .select-btn-ui {
-  transform: scale(1.05);
-  background: #00e6b8;
-}
-
-/* Landing Layout */
-.landing-container {
+.feed-container {
   height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.feed-container::-webkit-scrollbar { display: none; }
+
+/* The Reel Structure */
+.chunk-slide {
+  height: 100vh;
+  width: 100%;
+  max-width: 500px; 
+  margin: 0 auto;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: #000;
+  /* CHANGED: Centers content vertically so it's not "so low" */
+  justify-content: center; 
+  padding: 20px 30px;
+  box-sizing: border-box;
+  position: relative;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
 }
 
-.upload-dropzone {
-  border: 2px dashed rgba(255, 255, 255, 0.2);
-  padding: 40px;
-  border-radius: 20px;
-  cursor: pointer;
+/* NEW: Progress bar at the top of each reel */
+.top-progress-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 350px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.top-progress-fill {
+  height: 100%;
+  background: #00ffcc;
+  transition: width 0.4s ease;
+}
+
+/* UI Elements */
+.difficulty-badge {
+  background: #00ffcc;
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  width: fit-content;
+}
+
+.hook-text {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0 0 15px 0;
+  letter-spacing: -2px;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #aaa;
+  margin-bottom: 30px;
+}
+
+.bullet-points {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.bullet-points li {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-radius: 15px;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
 }
