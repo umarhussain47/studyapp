@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 
 function App() {
   const [feedData, setFeedData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-
+  //ddddddddddd
+  // Removes those ugly ** or __ from the AI output
   const clean = (text) => typeof text === 'string' ? text.replace(/[*_]/g, '') : '';
 
-  // Logic to handle file upload...
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -36,7 +36,7 @@ function App() {
         <h1 className="logo-text">PDF FLICK</h1>
         <label className="upload-card">
            <div className="icon-box">📁</div>
-           <h3>{isLoading ? "GENERATING REELS..." : "Select Study PDF"}</h3>
+           <h3>{isLoading ? "CRUNCHING..." : "Select PDF"}</h3>
            <input type="file" accept="application/pdf" onChange={handleFileUpload} style={{display:'none'}}/>
         </label>
       </div>
@@ -47,6 +47,7 @@ function App() {
     <div className="feed-container">
       {feedData?.chunks?.map((chunk, index) => (
         <div key={index} className="chunk-slide">
+          {/* Side Progress Bar */}
           <div className="side-progress">
             <div 
               className="progress-fill" 
@@ -68,5 +69,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
