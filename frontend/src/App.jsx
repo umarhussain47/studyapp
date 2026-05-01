@@ -18,13 +18,12 @@ function App() {
     formData.append('file', file);
 
     try {
-      // Replaced localhost with your live Render URL
       const response = await fetch('https://studyapp-yk9p.onrender.com/upload-pdf', {
         method: 'POST',
         body: formData,
       });
 
-      if (!response.ok) throw new Error('Generation failed. Check backend logs.');
+      if (!response.ok) throw new Error('Generation failed.');
 
       const data = await response.json();
       setFeedData(data);
@@ -35,7 +34,6 @@ function App() {
     }
   };
 
-  // The landing page UI with the improved Upload Button
   if (!feedData) return (
     <div className="landing-container">
       <div className="hero-header">
@@ -43,7 +41,7 @@ function App() {
         <p className="subtitle-ui">Transforming notes into reels</p>
       </div>
 
-      {/* The Styled Upload Button (Label acts as the button) */}
+      {/* This label acts as your "Better Button" */}
       <label className="upload-dropzone">
         <div className="icon-wrapper">
           {isLoading ? <div className="spinner"></div> : "📄"}
@@ -59,7 +57,6 @@ function App() {
           </div>
         )}
 
-        {/* Hidden actual input */}
         <input 
           type="file" 
           accept="application/pdf" 
