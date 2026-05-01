@@ -1,69 +1,102 @@
-/* ... keep your existing feed-container styles ... */
+/* Core Layout */
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  background-color: #050505;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
+}
 
-.center-screen {
+.feed-container {
   height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.feed-container::-webkit-scrollbar { display: none; }
+
+/* The Reel Structure */
+.chunk-slide {
+  height: 100vh;
+  width: 100%;
+  max-width: 480px; /* Standard Reel/TikTok width on Desktop */
+  margin: 0 auto;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at center, #111 0%, #000 100%);
-  padding: 20px;
-  text-align: center;
+  justify-content: flex-end; /* Pushes text to the bottom like social media */
+  padding: 40px 24px 120px 24px;
+  box-sizing: border-box;
+  position: relative;
+  
+  /* The "Nice Border" and Glass Effect */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 100%);
 }
 
-.logo-text {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  font-weight: 900;
-  letter-spacing: -3px;
-  margin-bottom: 10px;
-  background: linear-gradient(to bottom, #fff, #666);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  color: #666;
-  font-size: 1rem;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-/* The New Outlined Upload Area */
-.upload-card {
-  border: 2px dashed rgba(0, 255, 204, 0.3);
-  padding: 60px 40px;
-  border-radius: 24px;
-  width: 100%;
-  max-width: 400px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  background: rgba(0, 255, 204, 0.02);
-}
-
-.upload-card:hover {
-  border-color: #00ffcc;
-  background: rgba(0, 255, 204, 0.05);
-  transform: translateY(-5px);
-}
-
-.upload-btn {
-  display: inline-block;
-  background: #00ffcc;
-  color: #000;
-  padding: 14px 32px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 0.9rem;
-  margin-top: 20px;
-  box-shadow: 0 10px 20px rgba(0, 255, 204, 0.2);
-}
-
-.error-msg {
-  color: #ff4444;
-  margin-top: 20px;
-  font-size: 0.9rem;
-  background: rgba(255, 68, 68, 0.1);
-  padding: 8px 16px;
+/* Content Styling */
+.difficulty-badge {
+  background: rgba(0, 255, 204, 0.15);
+  color: #00ffcc;
+  padding: 6px 12px;
   border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0, 255, 204, 0.3);
+}
+
+.hook-text {
+  font-size: clamp(1.8rem, 5vw, 2.6rem); /* Scales dynamically */
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 15px 0;
+  letter-spacing: -1px;
+}
+
+.content-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #d1d1d1;
+  margin-bottom: 25px;
+}
+
+/* Bullet Point Container */
+.bullet-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.bullet-points li {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* Vertical Progress Bar */
+.progress-container {
+  position: absolute;
+  right: 10px;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #00ffcc;
+  border-radius: 10px;
+  transition: height 0.3s ease;
 }
