@@ -1,106 +1,69 @@
-html, body {
-  margin: 0; padding: 0; height: 100%;
-  background-color: #050505;
-  color: #fff;
-  font-family: 'Inter', -apple-system, sans-serif;
-  overflow: hidden;
-}
+/* ... keep your existing feed-container styles ... */
 
-.feed-container {
+.center-screen {
   height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scrollbar-width: none;
-}
-
-.feed-container::-webkit-scrollbar { display: none; }
-
-/* The Reel Container */
-.chunk-slide {
-  height: 100vh;
-  width: 100%;
-  max-width: 420px; /* Standard mobile width */
-  margin: 0 auto;
-  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  padding: 20px;
   text-align: center;
-  padding: 40px 24px;
-  box-sizing: border-box;
-  position: relative;
-  
-  /* The "Nice Border" - subtle glassmorphism effect */
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,0.03) 100%);
 }
 
-/* Dynamic Font Scaling for Different Screens */
-.hook-text {
-  font-size: clamp(1.8rem, 5vw, 2.5rem); /* Adjusts based on screen width */
+.logo-text {
+  font-size: clamp(2.5rem, 8vw, 4rem);
   font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 20px;
+  letter-spacing: -3px;
+  margin-bottom: 10px;
+  background: linear-gradient(to bottom, #fff, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 40px;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
 }
 
-.content-text {
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  line-height: 1.6;
-  color: #bbb;
-  margin-bottom: 30px;
-  max-width: 90%;
+/* The New Outlined Upload Area */
+.upload-card {
+  border: 2px dashed rgba(0, 255, 204, 0.3);
+  padding: 60px 40px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: rgba(0, 255, 204, 0.02);
 }
 
-.difficulty-badge {
+.upload-card:hover {
+  border-color: #00ffcc;
+  background: rgba(0, 255, 204, 0.05);
+  transform: translateY(-5px);
+}
+
+.upload-btn {
+  display: inline-block;
   background: #00ffcc;
   color: #000;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 0.7rem;
+  padding: 14px 32px;
+  border-radius: 12px;
   font-weight: 800;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
-}
-
-.bullet-points {
-  width: 100%;
-  padding: 0;
-}
-
-.bullet-points li {
-  background: rgba(255, 255, 255, 0.07);
-  margin-bottom: 10px;
-  padding: 14px;
-  border-radius: 15px;
   font-size: 0.9rem;
-  list-style: none;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: transform 0.2s;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 255, 204, 0.2);
 }
 
-/* Hover effect for desktop users */
-.bullet-points li:hover {
-  transform: scale(1.02);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Progress bar styling */
-.progress-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5px;
-  width: 100%;
-  background: rgba(255,255,255,0.1);
-}
-
-.progress-bar {
-  height: 100%;
-  background: #00ffcc;
-  transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.error-msg {
+  color: #ff4444;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  background: rgba(255, 68, 68, 0.1);
+  padding: 8px 16px;
+  border-radius: 8px;
 }

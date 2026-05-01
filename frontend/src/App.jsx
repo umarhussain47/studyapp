@@ -11,24 +11,29 @@ function App() {
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
+    
     setIsLoading(true);
     setError(null);
-
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      // Remember to update this URL with your Render URL when you deploy!
-      // Use the URL Render gives you after deployment
-      const response = await fetch('https://studyapp-yk9p.onrender.com//upload-pdf', {
+      // FIX: Ensure no trailing slash on the base URL and no double slash before the endpoint
+      const API_BASE = "https://studyapp-yk9p.onrender.com";
+      const response = await fetch(`${API_BASE}/upload-pdf`, {
         method: 'POST',
         body: formData,
       });
-      if (!response.ok) throw new Error('Backend failed');
+
+      if (response.status === 404) {
+        throw new Error("Endpoint not found (404). Check backend router.");
+      }
+      if (!response.ok) throw new Error('Generation failed. Check API Key.');
+
       const data = await response.json();
       setFeedData(data);
     } catch (err) {
-      setError("Unable to connect to backend.");
+      setError(err.message || "Connection failed.");
     } finally {
       setIsLoading(false);
     }
@@ -37,18 +42,24 @@ function App() {
   if (isLoading) return (
     <div className="center-screen">
       <div className="loader"></div>
-      <h2 style={{color: '#00ffcc'}}>FLICKING THROUGH PDF...</h2>
+      <h2 style={{color: '#00ffcc', letterSpacing: '2px'}}>CRUNCHING PDF...</h2>
     </div>
   );
 
   if (!feedData) return (
     <div className="center-screen">
-      <h1 style={{fontSize: '3rem', fontWeight: '900', letterSpacing: '-2px'}}>PDF FLICK</h1>
-      <label className="upload-btn">
-        SELECT PDF
+      <h1 className="logo-text">PDF FLICK</h1>
+      <p className="subtitle">Swipe through your notes</p>
+      
+      <label className="upload-card">
+        <div style={{fontSize: '2rem', marginBottom: '10px'}}>📄</div>
+        <div style={{color: '#fff', fontWeight: '600'}}>Drop your PDF here</div>
+        <div style={{color: '#555', fontSize: '0.8rem'}}>or click to browse</div>
+        <div className="upload-btn">SELECT FILE</div>
         <input type="file" accept="application/pdf" onChange={handleFileUpload} style={{ display: 'none' }} />
       </label>
-      {error && <p style={{ color: '#ff4444', marginTop: '20px' }}>{error}</p>}
+
+      {error && <p className="error-msg">⚠️ {error}</p>}
     </div>
   );
 
@@ -59,11 +70,9 @@ function App() {
           <div className="progress-container">
             <div className="progress-bar" style={{ width: `${((index + 1) / feedData.chunks.length) * 100}%` }}></div>
           </div>
-
           <div className="difficulty-badge">{cleanText(chunk.difficulty_level)}</div>
           <h1 className="hook-text">{cleanText(chunk.hook)}</h1>
           <p className="content-text">{cleanText(chunk.content)}</p>
-          
           <ul className="bullet-points">
             {(chunk.bullet_points || []).map((point, i) => (
               <li key={i}>{cleanText(point)}</li>
