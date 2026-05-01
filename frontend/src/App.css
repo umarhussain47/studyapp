@@ -15,39 +15,22 @@ html, body {
 }
 .feed-container::-webkit-scrollbar { display: none; }
 
-/* The Reel Structure */
+/* The Reel Structure - Widened and Rebalanced */
 .chunk-slide {
   height: 100vh;
   width: 100%;
-  max-width: 500px; 
+  max-width: 500px; /* Slightly wider for better text flow */
   margin: 0 auto;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  /* CHANGED: Centers content vertically so it's not "so low" */
-  justify-content: center; 
+  justify-content: center; /* Center content vertically for a cleaner look */
   padding: 20px 30px;
   box-sizing: border-box;
   position: relative;
   border-left: 1px solid rgba(255, 255, 255, 0.05);
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   background: radial-gradient(circle at center, #111 0%, #000 100%);
-}
-
-/* NEW: Progress bar at the top of each reel */
-.top-progress-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.top-progress-fill {
-  height: 100%;
-  background: #00ffcc;
-  transition: width 0.4s ease;
 }
 
 /* UI Elements */
@@ -61,6 +44,7 @@ html, body {
   text-transform: uppercase;
   margin-bottom: 20px;
   width: fit-content;
+  letter-spacing: 1px;
 }
 
 .hook-text {
@@ -69,6 +53,7 @@ html, body {
   line-height: 1;
   margin: 0 0 15px 0;
   letter-spacing: -2px;
+  text-align: left;
 }
 
 .content-text {
@@ -76,6 +61,7 @@ html, body {
   line-height: 1.5;
   color: #aaa;
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .bullet-points {
@@ -93,6 +79,26 @@ html, body {
   padding: 15px 20px;
   border-radius: 15px;
   font-size: 1rem;
+  font-weight: 500;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
+  text-align: center; /* Keep buttons centered for that "choice" look */
+  transition: transform 0.2s ease;
+}
+
+/* Side Progress Tracker */
+.side-progress {
+  position: absolute;
+  right: 15px;
+  top: 20%;
+  height: 60%;
+  width: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+.progress-fill {
+  width: 100%;
+  background: #00ffcc;
+  border-radius: 10px;
+  transition: height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
