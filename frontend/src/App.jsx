@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [feedData, setFeedData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-
+  //ddddddddddd
   // Removes those ugly ** or __ from the AI output
   const clean = (text) => typeof text === 'string' ? text.replace(/[*_]/g, '') : '';
 
