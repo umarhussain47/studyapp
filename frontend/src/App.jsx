@@ -4,8 +4,7 @@ import './App.css'
 function App() {
   const [feedData, setFeedData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  //ddddddddddd
-  // Removes those ugly ** or __ from the AI output
+
   const clean = (text) => typeof text === 'string' ? text.replace(/[*_]/g, '') : '';
 
   const handleFileUpload = async (event) => {
@@ -47,11 +46,11 @@ function App() {
     <div className="feed-container">
       {feedData?.chunks?.map((chunk, index) => (
         <div key={index} className="chunk-slide">
-          {/* Side Progress Bar */}
-          <div className="side-progress">
+          {/* Top Progress Bar */}
+          <div className="top-progress-container">
             <div 
-              className="progress-fill" 
-              style={{ height: `${((index + 1) / feedData.chunks.length) * 100}%` }}
+              className="top-progress-fill" 
+              style={{ width: `${((index + 1) / feedData.chunks.length) * 100}%` }}
             ></div>
           </div>
 
