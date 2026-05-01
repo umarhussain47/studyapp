@@ -4,9 +4,8 @@ import './App.css'
 function App() {
   const [feedData, setFeedData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
 
-  // Cleans the "horrible" markdown characters from AI output
+  // Removes those ugly ** or __ from the AI output
   const clean = (text) => typeof text === 'string' ? text.replace(/[*_]/g, '') : '';
 
   const handleFileUpload = async (event) => {
@@ -25,31 +24,33 @@ function App() {
       const data = await response.json();
       setFeedData(data);
     } catch (err) {
-      setError("Connection failed. Wake up Render.");
+      console.error("Upload failed");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (!feedData && !isLoading) return (
-    <div className="landing-container">
-      <h1 className="logo-text">PDF FLICK</h1>
-      <label className="upload-card">
-        <div className="icon-box">📁</div>
-        <h3>Select Study PDF</h3>
-        <input type="file" accept="application/pdf" onChange={handleFileUpload} style={{display:'none'}}/>
-      </label>
-    </div>
-  );
+  if (!feedData) {
+    return (
+      <div className="landing-container">
+        <h1 className="logo-text">PDF FLICK</h1>
+        <label className="upload-card">
+           <div className="icon-box">📁</div>
+           <h3>{isLoading ? "CRUNCHING..." : "Select PDF"}</h3>
+           <input type="file" accept="application/pdf" onChange={handleFileUpload} style={{display:'none'}}/>
+        </label>
+      </div>
+    );
+  }
 
   return (
     <div className="feed-container">
       {feedData?.chunks?.map((chunk, index) => (
         <div key={index} className="chunk-slide">
-          {/* Visual Progress Indicator */}
-          <div className="progress-container">
+          {/* Side Progress Bar */}
+          <div className="side-progress">
             <div 
-              className="progress-bar" 
+              className="progress-fill" 
               style={{ height: `${((index + 1) / feedData.chunks.length) * 100}%` }}
             ></div>
           </div>
@@ -68,5 +69,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
